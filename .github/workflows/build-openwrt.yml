@@ -9,8 +9,8 @@ name: Build Image
 on: workflow_dispatch
 
 env:
-  RELEASES: 21.02.0-rc1
-  TARGETS: sunxi
+  RELEASE: 21.02.0-rc1
+  TARGET: sunxi
   ARCH: cortexa7
   PROFILE: xunlong_orangepi-zero
   EXTRAFILES: false
@@ -36,7 +36,7 @@ jobs:
       
       - name: Download Image Builder
         run: |
-          wget https://downloads.openwrt.org/releases/$RELEASE/targets/$TARGETS/$ARCH/openwrt-imagebuilder-$RELEASE-$TARGETS-$ARCH.Linux-x86_64.tar.xz
+          wget https://downloads.openwrt.org/releases/$RELEASE/targets/$TARGET/$ARCH/openwrt-imagebuilder-$RELEASE-$TARGET-$ARCH.Linux-x86_64.tar.xz
       
       - name: Extract The Image Builder
         run: |
@@ -61,14 +61,12 @@ jobs:
       #   uses: actions/upload-artifact@v2
       #   with:
       #     name: OpenWrt_images
-      #     path: bin/targets/${{ env.TARGETS }}/${{ env.ARCH }}/
+      #     path: bin/targets/${{ env.TARGET }}/${{ env.ARCH }}/
 
       - name: Generate release tag
         id: tag
         run: |
           echo "::set-output name=release_tag::$(date +"%Y.%m.%d-%H%M")"
-          touch release.txt
-          echo "This image build with these packages include. Packages : $PACKAGES" > release.txt
           echo "::set-output name=status::success"
       
       - name: Release the image
@@ -77,5 +75,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ steps.tag.outputs.release_tag }}
-          body_path: release.txt
           files: bin/targets/${{ env.TARGETS }}/${{ env.ARCH }}/*
+          body: |
+            OpenWrt Imagebuilder
+            Release: ${{ env.RELEASE }}
+            Target: ${{ env.TARGET }}
+            Arch: ${{ env.ARCH }}
+            Build Profile: ${{ env.PROFILE }}
+            Including Packages: ${{ env.PACKAGES }}
