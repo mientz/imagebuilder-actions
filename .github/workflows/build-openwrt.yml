@@ -36,10 +36,11 @@ jobs:
       
       - name: Download Image Builder
         run: |
-          curl -O https://downloads.openwrt.org/releases/$RELEASE/targets/$TARGETS/$ARCH/openwrt-imagebuilder-$RELEASE-$TARGETS-$ARCH.Linux-x86_64.tar.xz
+          wget https://downloads.openwrt.org/releases/$RELEASE/targets/$TARGETS/$ARCH/openwrt-imagebuilder-$RELEASE-$TARGETS-$ARCH.Linux-x86_64.tar.xz
       
       - name: Extract The Image Builder
         run: |
+          ls -la
           tar xJf openwrt*.tar.xz --strip-components=1
       
       - name: Build Image
