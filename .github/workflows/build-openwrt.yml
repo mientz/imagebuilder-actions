@@ -33,13 +33,11 @@ jobs:
           sudo -E apt-get -qq install curl build-essential ccache ecj fastjar file g++ gawk gettext git java-propose-classpath libelf-dev libncurses5-dev libncursesw5-dev libssl-dev python python2.7-dev python3 unzip wget python3-distutils python3-setuptools rsync subversion swig time xsltproc zlib1g-dev
           sudo -E apt-get -qq autoremove --purge
           sudo -E apt-get -qq clean
-          sudo mkdir -p /workdir
-          sudo chown $USER:$GROUPS /workdir
       
       - name: Download Image Builder
         run: |
           curl -O https://downloads.openwrt.org/releases/$RELEASE/targets/$TARGETS/$ARCH/openwrt-imagebuilder-$RELEASE-$TARGETS-$ARCH.Linux-x86_64.tar.xz
-          cp $GITHUB_WORKSPACE/ ./
+          cp -r $GITHUB_WORKSPACE/ ./
       
       - name: Extract The Image Builder
         run: |
