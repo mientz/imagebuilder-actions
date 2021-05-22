@@ -75,7 +75,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: OpenWrt ${{ env.TARGET }} ${{ env.RELEASE }} build date ${{ steps.tag.outputs.release_tag }}
+          tag_name: OpenWrt-${{ env.TARGET }}-${{ env.RELEASE }}-${{ steps.tag.outputs.release_tag }}
           files: bin/targets/${{ env.TARGET }}/${{ env.ARCH }}/*
           body: |
             Release: `${{ env.RELEASE }}`
