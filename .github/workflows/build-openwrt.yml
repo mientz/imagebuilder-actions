@@ -76,7 +76,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ steps.tag.outputs.release_tag }}
-          files: bin/targets/${{ env.TARGETS }}/${{ env.ARCH }}/*
+          files: bin/targets/${{ env.TARGET }}/${{ env.ARCH }}/*
           body: |
             OpenWrt Imagebuilder
             Release: ${{ env.RELEASE }}
