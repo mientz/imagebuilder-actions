@@ -37,7 +37,6 @@ jobs:
       - name: Download Image Builder
         run: |
           curl -O https://downloads.openwrt.org/releases/$RELEASE/targets/$TARGETS/$ARCH/openwrt-imagebuilder-$RELEASE-$TARGETS-$ARCH.Linux-x86_64.tar.xz
-          cp -r $GITHUB_WORKSPACE/ ./
       
       - name: Extract The Image Builder
         run: |
