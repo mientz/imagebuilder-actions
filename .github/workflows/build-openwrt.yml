@@ -40,7 +40,7 @@ jobs:
       
       - name: Extract The Image Builder
         run: |
-          tar xJf openwrt*.tar.xz --strip-components
+          tar xJf openwrt*.tar.xz --strip-components=1
       
       - name: Build Image
         id: image
